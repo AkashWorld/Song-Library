@@ -51,6 +51,18 @@ public class SongList {
 	}
 	
 	
+	public songinfo getSonginfoObj(String name, String artist) {
+		songinfo target;
+		Iterator<songinfo> songinfoIterator = array.iterator();
+		while(songinfoIterator.hasNext()) {
+			target = songinfoIterator.next();
+			if(target.name.equals(name) && target.artist.equals(artist)) {
+				return target;
+			}
+		}
+		return null;
+	}
+	
 	
 	
 	
@@ -143,6 +155,7 @@ public class SongList {
 		Obj.artist = placeholder[1];
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
+		Collections.sort(array, cmp);
 		return true;
 	}
 	
