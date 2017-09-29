@@ -21,7 +21,7 @@ public class SongList {
 		path = path + "\\songlist.txt";
 		System.out.println("Path being used for cache: "+path);
 		array = new ArrayList<songinfo>();
-		//this.load();
+		this.load();
 	}
 	
 	//prints the entire list for debugging
@@ -49,6 +49,8 @@ public class SongList {
 	public ArrayList<songinfo> getArrayList(){
 		return array;
 	}
+	
+	
 	
 	
 	
@@ -89,8 +91,7 @@ public class SongList {
 		if(array.size()>1) {
 		Collections.sort(array, cmp);
 		}
-		//saveThread savethread = new saveThread();
-		//savethread.start();  //thread that saves the arraylist to file
+		this.Save();
 		return true;
 	}
 	
@@ -123,34 +124,25 @@ public class SongList {
 	
 	
 	
-	//edits a songinfo object assuming a copy does not exist
-	public boolean edit(songinfo Obj, String name, String artist, String year, String album) {
-		if(Obj != null && array.contains(Obj)) {
-			return false;
-		}
-		
-		if(name != "") {
+	//edits a songinfo object assuming a copy does not exist, takes in the index of the changed song, and the changed values
+	public boolean edit(int index, String name, String artist, String year, String album) {
+		songinfo Obj = array.get(index);
+		String[] placeholder = new String[4];
 			if((!checkIfCopyExists(name, Obj.artist) && artist == "") || (!checkIfCopyExists(name, artist))) {
-			Obj.name = name;
+			placeholder[0] = name;
+			placeholder[1] = artist;
 			}
 			else {
+				System.out.println("Copy exists - edit failed");
 				return false;
 			}
-		}
-		if(artist != "") {
-			if((!checkIfCopyExists(Obj.name, artist) && name == "")) {
-			Obj.artist = artist;
-			}
-			else {
-				return false;
-			}
-		}
-		if(year != "") {
-			Obj.year = year;
-		}
-		if(album != "") {
-			Obj.album = album;
-		}
+			placeholder[2] = year;
+		    placeholder[3] = album;
+		    
+		Obj.name = placeholder[0];
+		Obj.artist = placeholder[1];
+		Obj.year = placeholder[2];
+		Obj.album = placeholder[3];
 		return true;
 	}
 	
@@ -162,34 +154,45 @@ public class SongList {
 		String tempName; String tempArtist; String tempAlbum; 
 		String tempYear; String buff; 
 		try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(path)));
+            @SuppressWarnings("resource")
+			BufferedReader br = new BufferedReader(new FileReader(new File(path)));
             
             while ((buff = br.readLine())  != null) {
             	tempName = null; tempArtist = null; tempAlbum = null; tempYear = null;
-            	if(!buff.equals("")) {
-            		tempName = buff;
-            	}
-            	buff = br.readLine();
-            	if(!buff.equals("")) {
+            	tempName = buff;
+            	
+            	
+            	
+            	if((buff = br.readLine()) != null) {
             		tempArtist = buff;
             	}
-            	buff = br.readLine();
-            	if(!buff.equals("")) {
+            	else {
+            		return false;
+            	}
+            	if((buff = br.readLine()) != null) {
             		tempAlbum = buff;
             	}
-            	buff = br.readLine();
-            	if(!buff.equals("")) {
+            	else {
+            		return false;
+            	}
+            	if((buff = br.readLine()) != null) {
             		tempYear = buff;
+            	}
+            	else {
+            		return false;
             	}
             	array.add(new songinfo(tempName, tempArtist, tempAlbum, tempYear));
             }
             br.close();
         }
-            catch (IOException e) {
-            e.printStackTrace();
+		catch(FileNotFoundException e) {	
+			return false;
+		}
+        catch (IOException e) {
             return false;
         }
-		
+			
+	
 		return true;	
 	}
 	
@@ -215,6 +218,7 @@ public class SongList {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 		return true;
@@ -230,10 +234,11 @@ public class SongList {
 		Iterator<songinfo> songinfoIterator = array.iterator();
 		while(songinfoIterator.hasNext()) {
 			target = songinfoIterator.next();
-			if(target.name.equals(name) && target.artist.equals(name)) {
+			if(target.name.equals(name) && target.artist.equals(artist)) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	
