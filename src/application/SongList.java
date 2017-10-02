@@ -16,12 +16,17 @@ public class SongList {
 	private String path;
 	
 	//SongList construct that takes in a path to the file to be saved
-	public SongList(){
-		path = System.getProperty("user.dir");
-		path = path + "\\songlist.txt";
-		System.out.println("Path being used for cache: "+path);
-		array = new ArrayList<songinfo>();
-		this.load();
+	public SongList(){ //when new SongList object is created, the previous two variables
+		//are declared and the following lines are executed
+		path = System.getProperty("user.dir"); //gets the current file path of this folder
+		path = path + "\\songlist.txt"; //string to add a songlist.txt text file to store song data
+		System.out.println("Path being used for cache: "+path); //printout of the path, no computation is done
+		array = new ArrayList<songinfo>(); //new ArrayList of type songinfo is created
+		this.load(); //the load function is executed which loads the textfile from the path initalized above,
+		//if there is no data or textfile already, nothing will be done. If there is a textfile, it will
+		//be parsed and the data will be loaded into the ArrayList. The purpose of this is to 
+		//ensure that the state of the program is preserved if the user exits the program
+		// and reopens it (song list stays the same)
 	}
 	
 	//prints the entire list for debugging
@@ -51,10 +56,24 @@ public class SongList {
 	}
 	
 	
+	//returns songinfo object when given the name of the song and the artist's name as parameters.
+	//The songinfo object has the following fields: Name, Artist, Album, Year
+	public songinfo getSonginfoObj(String name, String artist) {
+		songinfo target;
+		Iterator<songinfo> songinfoIterator = array.iterator();
+		while(songinfoIterator.hasNext()) {
+			target = songinfoIterator.next();
+			if(target.name.equals(name) && target.artist.equals(artist)) {
+				return target;
+			}
+		}
+		return null;
+	}
 	
 	
 	
-	//sort comparator for array.sort() function that is used in the add function
+	
+	//sort comparator for array.sort() function that is used in the 'add()' and 'edit()' functions
 	//sorts based on name of song first, then takes the artist into consideration
 	Comparator<songinfo> cmp = new Comparator<songinfo>() {
 	    @Override
@@ -81,7 +100,7 @@ public class SongList {
 	
 	
 	
-	//adds a song to the songinfo arraylist assuming a copy does not exist
+	//adds a song to the songinfo ArrayList assuming a copy does not exist
 	public boolean add(String name, String artist, String album, String year) {
 		if(array.size() != 0 && checkIfCopyExists(name, artist)) {
 			return false;
@@ -97,7 +116,7 @@ public class SongList {
 	
 	
 	
-	
+	//deletes song from the songinfo ArrayList taking in the name and artist as parameters
 	public boolean deleteSong(String name, String artist) {
 		Iterator<songinfo> it = array.iterator();
 		songinfo temp = null;
@@ -143,13 +162,15 @@ public class SongList {
 		Obj.artist = placeholder[1];
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
+		Collections.sort(array, cmp);
 		return true;
 	}
 	
 	
 	
 	
-	//loads the entire list structure from the path file
+	//loads the entire list structure from the path file if the pathfile exists, otherwise
+	//nothing is executed
 	private boolean load() {
 		String tempName; String tempArtist; String tempAlbum; 
 		String tempYear; String buff; 
@@ -199,7 +220,10 @@ public class SongList {
 	
 	
 	
-	//saves the entire list to the file identified by the path variable
+	//saves the entire list to the file identified by the path variable, this is done
+	//to preserve the state of the list upon termination of the program. Once
+	//the program is relaunched and a SongList object in re-initialized, the textfile
+	//will be loaded into the ArrayList structure.
 	private boolean Save() {
 		if(array.size() == 0) {
 			return false;
@@ -248,7 +272,7 @@ public class SongList {
 	
 	
 	//thread class for saving
-	public class saveThread extends Thread{
+	private class saveThread extends Thread{
 		public void run() {
 			Save();
 		}
