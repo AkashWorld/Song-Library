@@ -7,19 +7,16 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
-	String names[] = {"I fall apart", "Mask off", "Novacane", "EmSong", "Its lit"};
-	String artist[] = {"Post Malone", "Future", "Post Malone", "Eminem", "Post Malone"};
-	String album[] = {"Stoney", "Drugs", "", "Hard", "Stoney"};
-	String year[] = {"2017", "2016", "", "2009","2017"};
+
 	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		
-		SongList songlist = new SongList();
-		int i = 0;
-		
-		songlist.printList();
+
+        primaryStage.setTitle("Song Library");
+        primaryStage.show();
+
 			
 	}
 	
