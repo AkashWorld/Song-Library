@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane id="root" prefHeight="432.0" prefWidth="406.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <Pane layoutY="-28.0" prefHeight="386.0" prefWidth="304.0">
+         <children>
+            <ListView id="list" layoutX="77.0" layoutY="46.0" prefHeight="358.0" prefWidth="242.0" />
+         </children>
+      </Pane>
+      <Button id="addbutton" layoutX="111.0" layoutY="393.0" mnemonicParsing="false" text="ADD" />
+      <Button id="editbutton" layoutX="183.0" layoutY="393.0" mnemonicParsing="false" text="EDIT" />
+      <Button id="deletebutton" layoutX="249.0" layoutY="393.0" mnemonicParsing="false" text="DELETE" />
+   </children>
 </AnchorPane>
-
