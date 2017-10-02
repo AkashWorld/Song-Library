@@ -16,10 +16,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		SongList songlist = new SongList();
-		int i = 0;
 		
-		songlist.printList();
 			
 	}
 	
