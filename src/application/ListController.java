@@ -13,11 +13,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 public class ListController 
 {
+	SongList songlist;
 	@FXML Button addbutton;
 	@FXML Button editbutton;
 	@FXML Button deletebutton;
@@ -26,22 +26,15 @@ public class ListController
 	 public void start (Stage mainStage)
 	 {
 		 
-		 SongList songlist = new SongList();
+		songlist = new SongList();
 		songlist.add("name1", "artist1", "album1", "year1");
 		songlist.add("aame1", "artist1", "album1", "year1");
 		songlist.add("came1", "artist2", "album1", "year1");
 		songlist.add("came1", "artist1", "album1", "year1");
 		
 		ArrayList<songinfo> array = songlist.getArrayList();
-
-		 obsList = FXCollections.observableArrayList();
-		
-		 for(int i =0; i<array.size();i++)
-		 {
-			 obsList.add("Name: " + array.get(i).getName() + " Artist: " +array.get(i).getArtist());
-		 }
-		 System.out.println("here?");
-		 listview.setItems(obsList);
+		 createNewObslist();
+		 
 		 
 		 listview.getSelectionModel().select(0);
 		 listview.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> showItemInputDialog(mainStage,array));
@@ -50,20 +43,34 @@ public class ListController
 		 
 	 }
 	 
-	 @FXML
-	 private void handleButtonAdd(ActionEvent event) {
-	     // Button was clicked, do something...
-	     
+	 private void createNewObslist() {
+		 ArrayList<songinfo> array = songlist.getArrayList();
+		 obsList = FXCollections.observableArrayList();
+		 for(int i =0; i < array.size();i++)
+		 {
+			 obsList.add("Name: " + array.get(i).getName() + " Artist: " + array.get(i).getArtist());
+		 }
+		 listview.setItems(obsList);
 	 }
 	 
 	 @FXML
-	 private void handleButtonEdit(ActionEvent event) {
+	 private void onHandleAdd(ActionEvent event) {
 	     // Button was clicked, do something...
-	     
+		 songinfo song = getEditField();
+		 songlist.add(song.name, song.artist, song.year, song.album);
+	     createNewObslist();
 	 }
 	 
 	 @FXML
-	 private void handleButtonDelete(ActionEvent event) {
+	 private void onHandleEdit(ActionEvent event) {
+	     // Button was clicked, do something...
+	     songinfo song = getEditField();
+	     songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album);
+	     createNewObslist();
+	 }
+	 
+	 @FXML
+	 private void onHandleDelete(ActionEvent event) {
 	     // Button was clicked, do something...
 	     
 	 }
