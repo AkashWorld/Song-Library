@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 public class ListController 
 {
@@ -52,6 +53,20 @@ public class ListController
 		 }
 		 listview.setItems(obsList);
 	 }
+	 
+	 @FXML
+	 TextFlow textBox;
+	 
+	 @FXML
+	 private void mouseClick(MouseEvent arg0) {
+		 textBox.getChildren().clear();
+		 int index = listview.getSelectionModel().getSelectedIndex();
+		 ArrayList<songinfo> array = songlist.getArrayList();
+		 songinfo song = array.get(index);
+		 Text text = new Text("Name: " + song.name +"\nArtist: "+ song.artist + "\nAlbum: " + song.album + "\nYear: " + song.year);
+	     textBox.getChildren().add(text);
+	 }
+	 
 	 
 	 @FXML
 	 private void onHandleAdd(ActionEvent event) {
