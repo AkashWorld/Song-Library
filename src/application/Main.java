@@ -72,7 +72,7 @@ public class Main extends Application {
 	TextField editalbum;
 	@FXML
 	TextField edityear;
-	public songinfo getEditField() {
+	public songinfo getEditField() { //returns songinfo object with the values in the edit field
 		String name = editname.getCharacters().toString();
 		String artist = editartist.getCharacters().toString();
 		String album = editalbum.getCharacters().toString();

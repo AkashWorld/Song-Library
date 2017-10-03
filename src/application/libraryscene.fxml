@@ -12,7 +12,7 @@
       <Pane layoutY="-28.0" prefHeight="386.0" prefWidth="304.0">
          <children>
             <ListView id="list" layoutY="28.0" prefHeight="358.0" prefWidth="242.0" />
-            <TextFlow id="textBox" layoutX="244.0" layoutY="28.0" prefHeight="242.0" prefWidth="160.0" />
+            <TextFlow id="textBox" layoutX="244.0" layoutY="28.0" prefHeight="358.0" prefWidth="160.0" />
          </children>
       </Pane>
       <Button id="addbutton" layoutX="111.0" layoutY="436.0" mnemonicParsing="false" text="ADD" />
