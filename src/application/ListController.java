@@ -50,7 +50,23 @@ public class ListController
 		 
 	 }
 	 
+	 @FXML
+	 private void handleButtonAdd(ActionEvent event) {
+	     // Button was clicked, do something...
+	     
+	 }
 	 
+	 @FXML
+	 private void handleButtonEdit(ActionEvent event) {
+	     // Button was clicked, do something...
+	     
+	 }
+	 
+	 @FXML
+	 private void handleButtonDelete(ActionEvent event) {
+	     // Button was clicked, do something...
+	     
+	 }
 
 	 	@FXML
 		TextField editname;
