@@ -19,9 +19,9 @@
       <Button id="addbutton" layoutX="111.0" layoutY="436.0" mnemonicParsing="false" onAction="#onHandleAdd" text="ADD" />
       <Button id="editbutton" layoutX="183.0" layoutY="436.0" mnemonicParsing="false" onAction="#onHandleEdit" text="EDIT" />
       <Button id="deletebutton" layoutX="249.0" layoutY="436.0" mnemonicParsing="false" onAction="#onHandleDelete" text="DELETE" />
-      <TextField id="editname" layoutX="37.0" layoutY="371.0" promptText="Name" />
-      <TextField id="editartist" layoutX="206.0" layoutY="372.0" promptText="Artist" />
-      <TextField id="editalbum" layoutX="39.0" layoutY="405.0" promptText="Album" />
-      <TextField id="edityear" layoutX="208.0" layoutY="406.0" promptText="Year" />
+      <TextField fx:id="editname" layoutX="37.0" layoutY="371.0" promptText="Name" />
+      <TextField fx:id="editartist" layoutX="206.0" layoutY="372.0" promptText="Artist" />
+      <TextField fx:id="editalbum" layoutX="39.0" layoutY="405.0" promptText="Album" />
+      <TextField fx:id="edityear" layoutX="208.0" layoutY="406.0" promptText="Year" />
    </children>
 </AnchorPane>

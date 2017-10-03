@@ -98,12 +98,24 @@ public class SongList {
 	    }
 	};
 	
-	
+	public int getIndex(String name, String artist) {
+		Iterator<songinfo> it = array.iterator();
+		songinfo song;
+		int index = 0;
+		while(it.hasNext()) {
+			song = it.next();
+			if(song.name.equals(name) && song.artist.equals(artist)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
 	
 	//adds a song to the songinfo ArrayList assuming a copy does not exist
-	public boolean add(String name, String artist, String album, String year) {
-		if(array.size() != 0 && checkIfCopyExists(name, artist)) {
-			return false;
+	public int add(String name, String artist, String album, String year) {
+		if((array.size() != 0 && checkIfCopyExists(name, artist)) || ("".equals(name)||"".equals(artist)) ) {
+			return -1;
 		}
 		songinfo song = new songinfo(name, artist, album, year);
 		array.add(song);
@@ -111,7 +123,7 @@ public class SongList {
 		Collections.sort(array, cmp);
 		}
 		this.Save();
-		return true;
+		return getIndex(name,artist);
 	}
 	
 	
@@ -144,7 +156,7 @@ public class SongList {
 	
 	
 	//edits a songinfo object assuming a copy does not exist, takes in the index of the changed song, and the changed values
-	public boolean edit(int index, String name, String artist, String year, String album) {
+	public int edit(int index, String name, String artist, String year, String album) {
 		songinfo Obj = array.get(index);
 		String[] placeholder = new String[4];
 			if((!checkIfCopyExists(name, Obj.artist) && artist == "") || (!checkIfCopyExists(name, artist))) {
@@ -153,7 +165,7 @@ public class SongList {
 			}
 			else {
 				System.out.println("Copy exists - edit failed");
-				return false;
+				return -1;
 			}
 			placeholder[2] = year;
 		    placeholder[3] = album;
@@ -163,7 +175,7 @@ public class SongList {
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
 		Collections.sort(array, cmp);
-		return true;
+		return getIndex(name,artist);
 	}
 	
 	

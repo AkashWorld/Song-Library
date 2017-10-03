@@ -37,7 +37,7 @@ public class ListController
 		 
 		 
 		 listview.getSelectionModel().select(0);
-		 listview.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> showItemInputDialog(mainStage,array));
+		 
 		 
 		 
 		 
@@ -57,7 +57,7 @@ public class ListController
 	 private void onHandleAdd(ActionEvent event) {
 	     // Button was clicked, do something...
 		 songinfo song = getEditField();
-		 songlist.add(song.name, song.artist, song.year, song.album);
+		 listview.getSelectionModel().select(songlist.add(song.name, song.artist, song.year, song.album));
 	     createNewObslist();
 	 }
 	 
@@ -65,15 +65,29 @@ public class ListController
 	 private void onHandleEdit(ActionEvent event) {
 	     // Button was clicked, do something...
 	     songinfo song = getEditField();
-	     songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album);
+	     listview.getSelectionModel().select(songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album));
 	     createNewObslist();
 	 }
 	 
 	 @FXML
 	 private void onHandleDelete(ActionEvent event) {
 	     // Button was clicked, do something...
+		int tempLoc = listview.getSelectionModel().getSelectedIndex();
+		deleteSong(tempLoc);
+		createNewObslist();
 	     
 	 }
+	 
+	 
+	 public boolean deleteSong(int index)
+		{
+		 	ArrayList<songinfo >array = songlist.getArrayList();
+			if(index>=0 && index< array.size())
+			array.remove(index);
+			else
+				return false;
+			return true;
+		}
 
 	 	@FXML
 		TextField editname;
@@ -84,10 +98,10 @@ public class ListController
 		@FXML
 		TextField edityear;
 		public songinfo getEditField() { //returns songinfo object with the values in the edit field
-			String name = editname.getCharacters().toString();
-			String artist = editartist.getCharacters().toString();
-			String album = editalbum.getCharacters().toString();
-			String year = edityear.getCharacters().toString();
+			String name = editname.getText();
+			String artist = editartist.getText();
+			String album = editalbum.getText();
+			String year = edityear.getText();
 			return new songinfo(name, artist,album,year);
 			
 		}
@@ -106,22 +120,7 @@ public class ListController
 	        return;
 		}
 	 
-	 private void showItemInputDialog(Stage mainStage, ArrayList<songinfo> array) {                
-		   String itemName = listview.getSelectionModel().getSelectedItem();
-		   int index = listview.getSelectionModel().getSelectedIndex();
-		   songinfo item = array.get(index);
-		   
-		   TextInputDialog dialog = new TextInputDialog(item.toString());
-		   dialog.initOwner(mainStage); 
-		   dialog.setTitle("List Item");
-		   dialog.setHeaderText("Selected Item (Index: " + index + ")");
-		   dialog.setContentText("Enter name: ");
-		   Optional<String> result = dialog.showAndWait();
-		   if (result.isPresent()) {
-			   item.changeName(result.get()); 
-			   obsList.set(index, result.get());
-		   }
-	   }
+	 
 
 	 
 	
