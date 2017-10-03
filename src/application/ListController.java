@@ -19,11 +19,14 @@ import javafx.stage.Stage;
 public class ListController 
 {
 	SongList songlist;
+	ArrayList<songinfo> array;
 	@FXML Button addbutton;
 	@FXML Button editbutton;
 	@FXML Button deletebutton;
 	@FXML ListView<String> listview;
-	 private ObservableList<String> obsList;
+	private ObservableList<String> obsList;
+	Alert missingInfo;
+	Alert matchExists;
 	 public void start (Stage mainStage)
 	 {
 		 
@@ -32,16 +35,33 @@ public class ListController
 		songlist.add("aame1", "artist1", "album1", "year1");
 		songlist.add("came1", "artist2", "album1", "year1");
 		songlist.add("came1", "artist1", "album1", "year1");
-		
-		ArrayList<songinfo> array = songlist.getArrayList();
-		 createNewObslist();
+		createNewObslist();
+		listview.getSelectionModel().select(0);
+		updateDescription(0); 
+			missingInfo = new Alert(AlertType.INFORMATION);
+		   //dialog.initOwner(mainStage); 
+		   
+		   missingInfo.setTitle("Alert!");
+		  
+		   missingInfo.setHeaderText("Missing info needed");
+		  
+		   missingInfo.setContentText("Please check that you have filled in both the name and artist fields.");
+		   matchExists = new Alert(AlertType.INFORMATION);
+		   //dialog.initOwner(mainStage); 
+		   matchExists.setTitle("Alert!");
+		   matchExists.setHeaderText("Repeat entry");
+		   matchExists.setContentText("You cannot add a song with the same name and artist");
 		 
 		 
-		 listview.getSelectionModel().select(0);
-		 
-		 
-		 
-		 
+	 }
+	 
+	 public void updateDescription(int index){
+		 textBox.getChildren().clear();
+		 ArrayList<songinfo> array = songlist.getArrayList();
+		 songinfo song = array.get(index);
+		 Text text = new Text("Name: " + song.name +"\nArtist: "+ song.artist + "\nAlbum: " + song.album + "\nYear: " + song.year);
+	     textBox.getChildren().add(text);
+	 
 	 }
 	 
 	 private void createNewObslist() {
@@ -67,12 +87,22 @@ public class ListController
 	     textBox.getChildren().add(text);
 	 }
 	 
-	 
 	 @FXML
 	 private void onHandleAdd(ActionEvent event) {
 	     // Button was clicked, do something...
 		 songinfo song = getEditField();
-		 listview.getSelectionModel().select(songlist.add(song.name, song.artist, song.year, song.album));
+		 int holder = songlist.add(song.name, song.artist, song.year, song.album);
+		 if(holder==-1)
+		 {
+			 matchExists.show();
+			 return;
+		 }
+		 if(holder==-2)
+		 {
+		 missingInfo.show();
+		 return;
+		 }
+		 listview.getSelectionModel().select(holder);
 	     createNewObslist();
 	 }
 	 
@@ -80,7 +110,9 @@ public class ListController
 	 private void onHandleEdit(ActionEvent event) {
 	     // Button was clicked, do something...
 	     songinfo song = getEditField();
-	     listview.getSelectionModel().select(songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album));
+	     int index = songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album);
+	     listview.getSelectionModel().select(index);
+	     updateDescription(index);
 	     createNewObslist();
 	 }
 	 
@@ -89,6 +121,18 @@ public class ListController
 	     // Button was clicked, do something...
 		int tempLoc = listview.getSelectionModel().getSelectedIndex();
 		deleteSong(tempLoc);
+		if(tempLoc == songlist.getArrayList().size()) {
+			listview.getSelectionModel().select(tempLoc-1);
+			updateDescription(tempLoc-1);
+			createNewObslist();
+			return;
+		}
+		else if(songlist.getArrayList().isEmpty()){
+			createNewObslist();
+			return;
+		}
+		listview.getSelectionModel().select(tempLoc);
+		updateDescription(tempLoc);
 		createNewObslist();
 	     
 	 }
