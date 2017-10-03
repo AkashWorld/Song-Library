@@ -105,6 +105,7 @@ public class SongList {
 		while(it.hasNext()) {
 			song = it.next();
 			if(song.name.equals(name) && song.artist.equals(artist)) {
+				System.out.println("Index is: " +index);
 				return index;
 			}
 			index++;
@@ -175,7 +176,8 @@ public class SongList {
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
 		Collections.sort(array, cmp);
-		return getIndex(name,artist);
+		int i = getIndex(name, artist);
+		return i;
 	}
 	
 	

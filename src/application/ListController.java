@@ -102,8 +102,8 @@ public class ListController
 		 missingInfo.show();
 		 return;
 		 }
-		 listview.getSelectionModel().select(holder);
 	     createNewObslist();
+	     listview.getSelectionModel().select(holder);
 	 }
 	 
 	 @FXML
@@ -111,9 +111,10 @@ public class ListController
 	     // Button was clicked, do something...
 	     songinfo song = getEditField();
 	     int index = songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album);
-	     listview.getSelectionModel().select(index);
+	     System.out.print("Index in handle: " + index);
 	     updateDescription(index);
 	     createNewObslist();
+	     listview.getSelectionModel().select(index);
 	 }
 	 
 	 @FXML
@@ -131,10 +132,11 @@ public class ListController
 			createNewObslist();
 			return;
 		}
+		
+		
+		createNewObslist();
 		listview.getSelectionModel().select(tempLoc);
 		updateDescription(tempLoc);
-		createNewObslist();
-	     
 	 }
 	 
 	 
