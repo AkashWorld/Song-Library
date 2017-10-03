@@ -160,24 +160,37 @@ public class SongList {
 	public int edit(int index, String name, String artist, String year, String album) {
 		songinfo Obj = array.get(index);
 		String[] placeholder = new String[4];
-			if((!checkIfCopyExists(name, Obj.artist) && artist == "") || (!checkIfCopyExists(name, artist))) {
-			placeholder[0] = name;
-			placeholder[1] = artist;
-			}
-			else {
-				System.out.println("Copy exists - edit failed");
-				return -1;
-			}
-			placeholder[2] = year;
-		    placeholder[3] = album;
-		    
+		if(name.equals(""))
+			placeholder[0]=Obj.name;
+		else 
+			placeholder[0]=name;
+		if(artist.equals(""))
+			placeholder[1]=Obj.artist;
+		else 
+			placeholder[1]=artist;
+		if(year.equals(""))
+			placeholder[2]=Obj.year;
+		else 
+			placeholder[2]=year;
+		if(album.equals(""))
+			placeholder[3]=Obj.album;
+		else 
+			placeholder[3]=album;
+		if(checkIfCopyExists(placeholder[0],placeholder[1]))
+		{
+			System.out.println(placeholder[0]+" "+placeholder[1]);
+			return -1;
+			
+			
+		}
+		
 		Obj.name = placeholder[0];
 		Obj.artist = placeholder[1];
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
 		Collections.sort(array, cmp);
-		int i = getIndex(name, artist);
-		return i;
+		System.out.println("am I getting here?");
+		return getIndex(placeholder[0],placeholder[1]);
 	}
 	
 	

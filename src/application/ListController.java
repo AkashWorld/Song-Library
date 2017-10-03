@@ -1,3 +1,5 @@
+//Khalid Akash Terence Coelho
+
 package application;
 import javafx.event.ActionEvent;
 import java.util.Optional;
@@ -31,27 +33,23 @@ public class ListController
 	 {
 		 
 		songlist = new SongList();
-		songlist.add("name1", "artist1", "album1", "year1");
-		songlist.add("aame1", "artist1", "album1", "year1");
-		songlist.add("came1", "artist2", "album1", "year1");
-		songlist.add("came1", "artist1", "album1", "year1");
 		createNewObslist();
+		if(songlist.getArrayList().size()!=0) {
 		listview.getSelectionModel().select(0);
 		updateDescription(0); 
-			missingInfo = new Alert(AlertType.INFORMATION);
-		   //dialog.initOwner(mainStage); 
+		}
+		missingInfo = new Alert(AlertType.INFORMATION);
+		//dialog.initOwner(mainStage); 
+		missingInfo.setTitle("Alert!");
+		missingInfo.setHeaderText("Missing info needed");
+		missingInfo.setContentText("Please check that you have filled in both the name and artist fields.");
+		matchExists = new Alert(AlertType.INFORMATION);
+		//dialog.initOwner(mainStage); 
+		matchExists.setTitle("Alert!");
+		matchExists.setHeaderText("Repeat entry");
+		matchExists.setContentText("You cannot add a song with the same name and artist");
 		   
-		   missingInfo.setTitle("Alert!");
-		  
-		   missingInfo.setHeaderText("Missing info needed");
-		  
-		   missingInfo.setContentText("Please check that you have filled in both the name and artist fields.");
-		   matchExists = new Alert(AlertType.INFORMATION);
-		   //dialog.initOwner(mainStage); 
-		   matchExists.setTitle("Alert!");
-		   matchExists.setHeaderText("Repeat entry");
-		   matchExists.setContentText("You cannot add a song with the same name and artist");
-		 
+		   
 		 
 	 }
 	 
@@ -112,6 +110,11 @@ public class ListController
 	     songinfo song = getEditField();
 	     int index = songlist.edit(listview.getSelectionModel().getSelectedIndex(), song.name, song.artist, song.year, song.album);
 	     System.out.print("Index in handle: " + index);
+	     if(index==-1)
+	     {
+	    	 matchExists.show();
+	    	 return;
+	     }
 	     updateDescription(index);
 	     createNewObslist();
 	     listview.getSelectionModel().select(index);
@@ -122,7 +125,11 @@ public class ListController
 	     // Button was clicked, do something...
 		int tempLoc = listview.getSelectionModel().getSelectedIndex();
 		deleteSong(tempLoc);
-		if(tempLoc == songlist.getArrayList().size()) {
+		if(songlist.getArrayList().size() == 0) {
+			createNewObslist();
+			return;
+		}
+		else if(tempLoc == songlist.getArrayList().size()) {
 			listview.getSelectionModel().select(tempLoc-1);
 			updateDescription(tempLoc-1);
 			createNewObslist();

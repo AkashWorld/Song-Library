@@ -1,3 +1,4 @@
+//Khalid Akash Terence Coelho
 package application;
 	
 import javafx.application.Application;
@@ -28,7 +29,7 @@ public class Main extends Application {
 	      ListController listController = loader.getController();
 	      listController.start(primaryStage);
 	      
-	      Scene scene = new Scene(root, 200, 300);
+	      Scene scene = new Scene(root, 412, 485);
 	      
 	      primaryStage.setScene(scene);
 	      
