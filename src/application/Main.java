@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +23,8 @@ public class Main extends Application {
 
 	@FXML
 	private ListView<songinfo> list;
+	@FXML
+	private Button addbutton;
 	@FXML
 	private AnchorPane root;
 	ArrayList<songinfo> array;
@@ -41,9 +44,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		
-<<<<<<< HEAD
-		
-=======
 		SongList songlist = new SongList();
 		array = songlist.getArrayList();
 		songlist.add("Post Malone", "RockStar","", "1963");
@@ -56,7 +56,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
->>>>>>> c28604a56d3ea815697325cc0ed95d06b7ab2245
+
 			
 	}
 	

@@ -22,7 +22,7 @@ public class SongList {
 		path = path + "\\songlist.txt"; //string to add a songlist.txt text file to store song data
 		System.out.println("Path being used for cache: "+path); //printout of the path, no computation is done
 		array = new ArrayList<songinfo>(); //new ArrayList of type songinfo is created
-		this.load(); //the load function is executed which loads the textfile from the path initalized above,
+		//this.load(); //the load function is executed which loads the textfile from the path initalized above,
 		//if there is no data or textfile already, nothing will be done. If there is a textfile, it will
 		//be parsed and the data will be loaded into the ArrayList. The purpose of this is to 
 		//ensure that the state of the program is preserved if the user exits the program
