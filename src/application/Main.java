@@ -15,8 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
 public class Main extends Application {
@@ -59,6 +62,38 @@ public class Main extends Application {
 
 			
 	}
+	
+	
+	@FXML
+	TextField editname;
+	@FXML
+	TextField editartist;
+	@FXML
+	TextField editalbum;
+	@FXML
+	TextField edityear;
+	public songinfo getEditField() {
+		String name = editname.getCharacters().toString();
+		String artist = editartist.getCharacters().toString();
+		String album = editalbum.getCharacters().toString();
+		String year = edityear.getCharacters().toString();
+		return new songinfo(name, artist,album,year);
+		
+	}
+	
+	
+	@FXML
+	TextFlow textbox; //textflow reference
+	
+	public void onSelectSong(int index, ArrayList<songinfo> array) {
+		songinfo selectedSong = array.get(index); //index of selected song
+		Text text = new Text("Name: " + selectedSong.name+ "\nArtist: " + selectedSong.artist 
+				+ "\nAlbum: " + selectedSong.album + "\nYear: " + selectedSong.year); //text in textflow box
+        textbox.getChildren().add(text); 
+        return;
+	}
+	
+	
 	
 	public static void main(String[] args) {
 			launch(args);
