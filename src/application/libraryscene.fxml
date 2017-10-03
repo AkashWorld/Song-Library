@@ -9,7 +9,7 @@
 
 <AnchorPane id="root" prefHeight="475.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutY="-28.0" prefHeight="386.0" prefWidth="304.0">
+      <Pane layoutX="-6.0" prefHeight="478.0" prefWidth="412.0">
          <children>
             <ListView id="list" layoutY="28.0" prefHeight="358.0" prefWidth="242.0" />
             <TextFlow id="textBox" layoutX="244.0" layoutY="28.0" prefHeight="358.0" prefWidth="160.0" />
