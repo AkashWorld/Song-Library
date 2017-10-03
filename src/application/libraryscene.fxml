@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane id="root" prefHeight="432.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="root" prefHeight="475.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutY="-28.0" prefHeight="386.0" prefWidth="304.0">
          <children>
@@ -14,8 +15,12 @@
             <TextFlow id="textBox" layoutX="244.0" layoutY="28.0" prefHeight="242.0" prefWidth="160.0" />
          </children>
       </Pane>
-      <Button id="addbutton" layoutX="111.0" layoutY="393.0" mnemonicParsing="false" text="ADD" />
-      <Button id="editbutton" layoutX="183.0" layoutY="393.0" mnemonicParsing="false" text="EDIT" />
-      <Button id="deletebutton" layoutX="249.0" layoutY="393.0" mnemonicParsing="false" text="DELETE" />
+      <Button id="addbutton" layoutX="111.0" layoutY="436.0" mnemonicParsing="false" text="ADD" />
+      <Button id="editbutton" layoutX="183.0" layoutY="436.0" mnemonicParsing="false" text="EDIT" />
+      <Button id="deletebutton" layoutX="249.0" layoutY="436.0" mnemonicParsing="false" text="DELETE" />
+      <TextField id="editname" layoutX="37.0" layoutY="371.0" promptText="Name" />
+      <TextField id="editartist" layoutX="206.0" layoutY="372.0" promptText="Artist" />
+      <TextField id="album" layoutX="39.0" layoutY="405.0" promptText="Album" />
+      <TextField id="year" layoutX="208.0" layoutY="406.0" promptText="Year" />
    </children>
 </AnchorPane>
