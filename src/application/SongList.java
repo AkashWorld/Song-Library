@@ -134,7 +134,6 @@ public class SongList {
 	
 	public boolean deleteSong(int index)
 	{
-	 	ArrayList<songinfo >array = songlist.getArrayList();
 		if(index>=0 && index< array.size()) {
 		array.remove(index);
 		this.Save();}
