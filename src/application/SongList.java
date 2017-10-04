@@ -116,8 +116,11 @@ public class SongList {
 	
 	//adds a song to the songinfo ArrayList assuming a copy does not exist
 	public int add(String name, String artist, String album, String year) {
-		if((array.size() != 0 && checkIfCopyExists(name, artist)) || ("".equals(name)||"".equals(artist)) ) {
+		if((array.size() != 0 && checkIfCopyExists(name, artist))  ) {
 			return -1;
+		}
+		else if(("".equals(name)||"".equals(artist))) {
+			return -2;
 		}
 		songinfo song = new songinfo(name, artist, album, year);
 		array.add(song);
