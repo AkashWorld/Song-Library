@@ -125,7 +125,7 @@ public class ListController
 	 private void onHandleDelete(ActionEvent event) {
 	     // Button was clicked, do something...
 		int tempLoc = listview.getSelectionModel().getSelectedIndex();
-		deleteSong(tempLoc);
+		songlist.deleteSong(tempLoc);
 		if(songlist.getArrayList().size() == 0) {
 			createNewObslist();
 			return;
@@ -148,16 +148,7 @@ public class ListController
 	 }
 	 
 	 
-	 public boolean deleteSong(int index)
-		{
-		 	ArrayList<songinfo >array = songlist.getArrayList();
-			if(index>=0 && index< array.size()) {
-			array.remove(index);
-			songlist.Save();}
-			else
-				return false;
-			return true;
-		}
+	 
 
 	 	@FXML
 		TextField editname;

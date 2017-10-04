@@ -132,24 +132,14 @@ public class SongList {
 	}
 	
 	
-	
-	//deletes song from the songinfo ArrayList taking in the name and artist as parameters
-	public boolean deleteSong(String name, String artist) {
-		Iterator<songinfo> it = array.iterator();
-		songinfo temp = null;
-		int index = 0;
-		while(it.hasNext()) {
-			temp = it.next();
-			if(temp.name == name && temp.artist == artist) {
-				array.remove(index);
-				break;
-			}
-			if(!it.hasNext()) {
-				return false;
-			}
-			index = index + 1;
-		}
-		this.Save();
+	public boolean deleteSong(int index)
+	{
+	 	ArrayList<songinfo >array = songlist.getArrayList();
+		if(index>=0 && index< array.size()) {
+		array.remove(index);
+		this.Save();}
+		else
+			return false;
 		return true;
 	}
 	
