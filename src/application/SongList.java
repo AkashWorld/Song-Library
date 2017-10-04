@@ -23,7 +23,7 @@ public class SongList {
 		path = path + "\\songlist.txt"; //string to add a songlist.txt text file to store song data
 		System.out.println("Path being used for cache: "+path); //printout of the path, no computation is done
 		array = new ArrayList<songinfo>(); //new ArrayList of type songinfo is created
-		//this.load(); //the load function is executed which loads the textfile from the path initalized above,
+		this.load(); //the load function is executed which loads the textfile from the path initalized above,
 		//if there is no data or textfile already, nothing will be done. If there is a textfile, it will
 		//be parsed and the data will be loaded into the ArrayList. The purpose of this is to 
 		//ensure that the state of the program is preserved if the user exits the program
@@ -146,6 +146,7 @@ public class SongList {
 			}
 			index = index + 1;
 		}
+		this.Save();
 		return true;
 	}
 	
@@ -177,6 +178,10 @@ public class SongList {
 			placeholder[3]=Obj.album;
 		else 
 			placeholder[3]=album;
+		Obj.name="";
+		Obj.album="";
+		Obj.artist="";
+		Obj.year="";
 		if(checkIfCopyExists(placeholder[0],placeholder[1]))
 		{
 			System.out.println(placeholder[0]+" "+placeholder[1]);
@@ -190,7 +195,7 @@ public class SongList {
 		Obj.year = placeholder[2];
 		Obj.album = placeholder[3];
 		Collections.sort(array, cmp);
-		System.out.println("am I getting here?");
+		//System.out.println("am I getting here?");
 		return getIndex(placeholder[0],placeholder[1]);
 	}
 	
@@ -252,7 +257,7 @@ public class SongList {
 	//to preserve the state of the list upon termination of the program. Once
 	//the program is relaunched and a SongList object in re-initialized, the textfile
 	//will be loaded into the ArrayList structure.
-	private boolean Save() {
+	public boolean Save() {
 		if(array.size() == 0) {
 			return false;
 		}

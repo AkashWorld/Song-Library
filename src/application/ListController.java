@@ -102,6 +102,7 @@ public class ListController
 		 }
 	     createNewObslist();
 	     listview.getSelectionModel().select(holder);
+	     updateDescription(holder);
 	 }
 	 
 	 @FXML
@@ -150,8 +151,9 @@ public class ListController
 	 public boolean deleteSong(int index)
 		{
 		 	ArrayList<songinfo >array = songlist.getArrayList();
-			if(index>=0 && index< array.size())
+			if(index>=0 && index< array.size()) {
 			array.remove(index);
+			songlist.Save();}
 			else
 				return false;
 			return true;
