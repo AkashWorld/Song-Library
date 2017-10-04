@@ -79,19 +79,19 @@ public class SongList {
 	Comparator<songinfo> cmp = new Comparator<songinfo>() {
 	    @Override
 	    public int compare(songinfo s1, songinfo s2) {
-	    	if(s1.name.compareTo(s2.name) < 0) {
+	    	if(s1.name.compareToIgnoreCase(s2.name) < 0) {
 				return -1;
 			}
-			else if(s1.name.compareTo(s2.name) > 0) {
+			else if(s1.name.compareToIgnoreCase(s2.name) > 0) {
 				return 1;
 			}
 			else {
 				String currArtist = s1.artist;
 				String compareArtist = s2.artist;
-				if(currArtist.compareTo(compareArtist) < 0) {
+				if(currArtist.compareToIgnoreCase(compareArtist) < 0) {
 					return -1;
 				}
-				else if(currArtist.compareTo(compareArtist) > 0) {
+				else if(currArtist.compareToIgnoreCase(compareArtist) > 0) {
 					return 1;
 				}
 			}
